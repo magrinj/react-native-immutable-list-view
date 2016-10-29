@@ -75,4 +75,65 @@ describe('ImmutableListView vs. ListView', () => {
 
     expect(immutableTree).toEqual(regularTree);
   });
+
+  it.only('renders the same as ListView with basic Map with section headers', () => {
+    const immutableTree = renderer.create(
+      <ImmutableListView
+        immutableData={data.MAP_DATA}
+        renderRow={renderers.renderRow}
+        renderSectionHeader={renderers.renderSectionHeader}
+      />
+    ).toJSON();
+
+    dataSource = dataSource.cloneWithRows(data.MAP_DATA.toJS());
+    const regularTree = renderer.create(
+      <ListView
+        dataSource={dataSource}
+        renderRow={renderers.renderRow}
+        renderSectionHeader={renderers.renderSectionHeader}
+      />
+    ).toJSON();
+
+    expect(immutableTree).toEqual(regularTree);
+  });
+
+  it('renders the same as ListView with more complex Map with section headers', () => {
+    const immutableTree = renderer.create(
+      <ImmutableListView
+        immutableData={data.MAP_DATA_COMPLEX}
+        renderRow={renderers.renderRow}
+        renderSectionHeader={renderers.renderSectionHeader}
+      />
+    ).toJSON();
+
+    dataSource = dataSource.cloneWithRows(data.MAP_DATA_COMPLEX.toJS());
+    const regularTree = renderer.create(
+      <ListView
+        dataSource={dataSource}
+        renderRow={renderers.renderRow}
+        renderSectionHeader={renderers.renderSectionHeader}
+      />
+    ).toJSON();
+
+    expect(immutableTree).toEqual(regularTree);
+  });
+
+  it('renders the same as ListView with basic Set', () => {
+    const immutableTree = renderer.create(
+      <ImmutableListView
+        immutableData={data.SET_DATA}
+        renderRow={renderers.renderRow}
+      />
+    ).toJSON();
+
+    dataSource = dataSource.cloneWithRows(data.SET_DATA.toJS());
+    const regularTree = renderer.create(
+      <ListView
+        dataSource={dataSource}
+        renderRow={renderers.renderRow}
+      />
+    ).toJSON();
+
+    expect(immutableTree).toEqual(regularTree);
+  });
 });
